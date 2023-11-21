@@ -3,6 +3,7 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react";
+const BASE_URL = NEXT_PUBLIC_DEV?'http://localhost:3000/':'https://todo-supabase-nu.vercel.app/';
 
 export default function AuthButton(){
     const supabase = createClientComponentClient();
@@ -29,7 +30,7 @@ export default function AuthButton(){
         await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: 'http://localhost:3000/auth/callback'
+                redirectTo: `{BASE_URL}auth/callback`
             }
         })  }
     
