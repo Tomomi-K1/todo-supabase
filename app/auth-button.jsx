@@ -8,6 +8,7 @@ export default function AuthButton(){
     const supabase = createClientComponentClient();
     const router = useRouter();
     const [ session, setSession ] = useState();
+    console.log(session);
 
     useEffect(() => {
         const getSession = async () => {
@@ -32,14 +33,9 @@ export default function AuthButton(){
             }
         })  }
     
-    return (
-        <div>
-            {session
-            ? (
-                <button className="border rounded p-2 bg-blue-500" onClick={handleSignIn}> Login </button>
-            ):(
+    return session? (  
                 <button className="border rounded p-2 bg-red-500" onClick={handleSignOut}> Logout </button>
-            )}
-        </div>
-    )
+            ):(
+                <button className="border rounded p-2 bg-blue-500" onClick={handleSignIn}> Login </button>
+            )
 }
