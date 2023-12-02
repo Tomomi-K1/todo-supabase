@@ -21,7 +21,7 @@ export default function NavbarClient({session}){
         await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: `http://localhost:3000/auth/callback`
+                redirectTo: `${location.origin}/auth/callback`
             }
         })
         router.refresh(); 

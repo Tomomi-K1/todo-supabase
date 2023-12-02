@@ -1,14 +1,14 @@
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import NavbarServer from "../components/navbar-server";
 import { redirect } from "next/navigation";
 
 export default async function Login(){
-    const supabase = createClientComponentClient({cookies});
+    const supabase = createServerComponentClient({cookies});
     const { data: { session} } = await supabase.auth.getSession();
 
     if (session){
-      redirect('/');
+      return redirect('/');
     }
     return (
         <main className="h-screen flex flex-col items-center mt-10">

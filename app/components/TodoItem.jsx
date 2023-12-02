@@ -7,13 +7,19 @@ export default function TodoItem({item}){
     const supabase = createClientComponentClient();
 
     async function handleCompleteState(){
-        await supabase.from('todos').update({is_complete: !item.is_complete}).eq('task',item.task)
-        router.refresh();
+        const { data: { user}} = await supabase.auth.getUser();
+        if(user){
+            await supabase.from('todos').update({is_complete: !item.is_complete}).eq('task',item.task)
+            router.refresh();
+        }
     }
 
     async function handleDelete(){
-        await supabase.from('todos').delete().eq('task',item.task)
-        router.refresh();
+        const { data: { user}} = await supabase.auth.getUser();
+        if(user){
+            await supabase.from('todos').delete().eq('task',item.task)
+            router.refresh();
+        }
     }
 
     return (
